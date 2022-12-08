@@ -33,3 +33,13 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Running Jest Tests
+
+```bash
+# run tests
+npm run test
+
+# run tests in watch mode
+npm run test:watch
+```
