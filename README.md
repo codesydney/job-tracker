@@ -6,6 +6,15 @@ Track the progress of your job applications. This is a Code.Sydney side-project 
 
 Code.Sydney is a volunteering organisation that supports beginner developers transition to paid employment whilst primarily helping non-profit and charity organisations.
 
+## Tech Stack
+
+- TypeScript
+- Next.js
+- React
+- TailwindCSS
+- Prisma
+- PostgreSQL
+
 ## Getting Started
 
 ### Cloning the Project
