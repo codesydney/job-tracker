@@ -9,3 +9,51 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Application {
+  id            Int         @id @default(autoincrement())
+  jobListingId  Int         @unique
+  status        Status
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  
+  jobListing    JobListing  @relation(fields: [jobListingId], references: [id])
+}
+  
+enum Status {
+  APPLIED
+  REJECTED
+  PHONE_SCREEN
+  INTERVIEW
+  JOB_OFFER
+}
+
+model JobListing {
+  id                Int             @id @default(autoincrement())
+  jobDescriptionId  Int             @unique
+  url               String          @db.VarChar(512)
+  source            Source
+  position          String          
+  company           String
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  jobDescription    JobDescription  @relation(fields: [jobDescriptionId], references: [id])
+  application       Application?
+}
+
+enum Source {
+  LinkedIn
+  Seek
+}
+
+// This would be better stored in a BLOB database like AWS S3
+// But since I want to keep this project simple, 
+// we'll just use the Postgres DB
+model JobDescription {
+  id          Int         @id @default(autoincrement())
+  rawText     String
+  createdAt   DateTime    @default(now())
+
+  jobListing  JobListing?
+}
