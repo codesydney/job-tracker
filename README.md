@@ -52,3 +52,9 @@ npm run test
 # run tests in watch mode
 npm run test:watch
 ```
+
+## Database Schema
+
+![untitled (3)](https://user-images.githubusercontent.com/8443215/206895369-73715c30-bcae-4958-a0c9-b463801b8587.png)
+
+Note: A BLOB database would be better suited to store the Job Description text. But since I want to keep the project simple for the Code.Sydney members, we'll use a local PostgreSQL DB
