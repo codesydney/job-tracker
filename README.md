@@ -84,3 +84,11 @@ npm run test:watch
 ![untitled (3)](https://user-images.githubusercontent.com/8443215/206895369-73715c30-bcae-4958-a0c9-b463801b8587.png)
 
 Note: A BLOB database would be better suited to store the Job Description text. But since I want to keep the project simple for the Code.Sydney members, we'll use a local PostgreSQL DB for now.
+
+## Rest API Documentation
+
+[Applications API](./docs/api/v1/applications.md)
+
+[Job Descriptions API](./docs/api/v1/job-description.md)
+
+[Job listings API](./docs/api/v1/job-listings.md)
