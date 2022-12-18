@@ -4,27 +4,27 @@ import { NextApiRequest, NextApiResponse } from 'next';
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
     try {
-      const data = await prisma.application.findMany();
+      const data = await prisma.jobDescription.findMany();
       res.status(200).json(data);
     } catch (error) {
       res.status(500).json({
         message:
-          'Something went wrong from our side and we were unable to get Applications.',
+          'Something went wrong on our side and we failed to get Job Descriptions.',
       });
     }
   } else if (req.method === 'POST') {
     try {
-      const { jobListingId, status } = req.body;
-
-      const data = await prisma.application.create({
-        data: { jobListingId, status },
+      const { rawText } = req.body;
+      console.log(rawText);
+      const data = await prisma.jobDescription.create({
+        data: { rawText },
       });
 
       res.status(201).json(data);
     } catch (error) {
-      res
-        .status(400)
-        .json({ message: `Failed to create Application: status is invalid` });
+      res.status(500).json({
+        message: `Failed to create Job Description: invalid rawText field`,
+      });
     }
   }
 };

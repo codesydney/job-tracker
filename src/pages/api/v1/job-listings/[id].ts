@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       if (typeof req.query.id === 'string') {
         const { id } = req.query;
-        const data = await prisma.application.findUnique({
+        const data = await prisma.jobListing.findUnique({
           where: { id: parseInt(id) },
         });
         if (data) {
@@ -14,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         } else {
           res
             .status(404)
-            .json({ message: `Could not find Application with id ${id}` });
+            .json({ message: `Could not find Job Listing with id ${id}` });
         }
       }
     } catch (error) {
@@ -26,10 +26,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       if (typeof req.query.id === 'string') {
         const { id } = req.query;
-        const { status } = req.body;
-        const data = await prisma.application.update({
+        const { url, source, position, company } = req.body;
+        const data = await prisma.jobListing.update({
           where: { id: parseInt(id) },
-          data: { status },
+          data: { url, source, position, company },
         });
         if (data) {
           res.status(200).json(data);
@@ -39,7 +39,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const { id } = req.query;
       if (Number(id)) {
         res.status(404).json({
-          message: `Could not find Application with id ${id}`,
+          message: `Could not find Job Listing with id ${id}`,
         });
       } else {
         res.status(400).json({
@@ -51,7 +51,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { id } = req.query;
     try {
       if (typeof id === 'string') {
-        const data = await prisma.application.delete({
+        const data = await prisma.jobListing.delete({
           where: { id: parseInt(id) },
         });
         if (data) {
@@ -62,7 +62,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const { id } = req.query;
       if (Number(id)) {
         res.status(404).json({
-          message: `Could not find Application with id ${id}`,
+          message: `Could not find Job Listing with id ${id}`,
         });
       } else {
         res.status(400).json({
