@@ -7,15 +7,16 @@ const getApplication = async (id: number, res: NextApiResponse) => {
     const data = await prisma.application.findUnique({
       where: { id },
     });
-    if (data) {
-      res.status(200).json(data);
-    } else {
-      res
+
+    if (!data) {
+      return res
         .status(404)
         .json({ message: `Could not find Application with id ${id}` });
     }
+
+    return res.status(200).json(data);
   } catch (error) {
-    res.status(400).json({
+    return res.status(400).json({
       message: `Invalid Input: 'id' was not a number`,
     });
   }
@@ -33,9 +34,8 @@ const updateHandler = async (
       where: { id },
       data: input,
     });
-    if (data) {
-      res.status(200).json(data);
-    }
+
+    return res.status(200).json(data);
   } catch (error) {
     res.status(404).json({
       message: `Could not find Application with id ${id}`,
@@ -49,11 +49,9 @@ const deleteHandler = async (id: number, res: NextApiResponse) => {
       where: { id },
     });
 
-    if (data) {
-      res.status(200).json(data);
-    }
+    return res.status(200).json(data);
   } catch (error) {
-    res.status(404).json({
+    return res.status(404).json({
       message: `Could not find Application with id ${id}`,
     });
   }
@@ -65,7 +63,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const id = parseInt(rawId);
 
   if (Number.isNaN(id)) {
-    res.status(400).json({
+    return res.status(400).json({
       message: `Invalid Input: 'id' was not a number`,
     });
   }
