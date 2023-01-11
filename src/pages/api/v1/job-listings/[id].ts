@@ -21,8 +21,6 @@ const getJobListing = async (req: NextApiRequest, res: NextApiResponse) => {
       message: `Invalid Input: 'id' was not a number`,
     });
   }
-  if (req.method === 'DELETE') {
-  }
 };
 
 const updateHandler = async (req: NextApiRequest, res: NextApiResponse) => {

@@ -11,8 +11,6 @@ const getJobListings = async (req: NextApiRequest, res: NextApiResponse) => {
         'Something went wrong from our side and we were unable to fetch Job Listings.',
     });
   }
-  if (req.method === 'POST') {
-  }
 };
 
 const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -41,7 +39,7 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
     getJobListings(req, res);
-  } else if (req.method === 'PATCH') {
+  } else if (req.method === 'POST') {
     postHandler(req, res);
   }
 };

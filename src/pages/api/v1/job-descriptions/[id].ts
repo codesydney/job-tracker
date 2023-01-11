@@ -21,9 +21,6 @@ const getJobDescription = async (req: NextApiRequest, res: NextApiResponse) => {
       message: `Invalid Input: 'id' was not a number`,
     });
   }
-  if (req.method === 'PATCH') {
-  } else if (req.method === 'DELETE') {
-  }
 };
 
 const updateHandler = async (req: NextApiRequest, res: NextApiResponse) => {
