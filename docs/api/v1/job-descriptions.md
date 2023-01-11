@@ -63,7 +63,6 @@ Status Code: `500`
 }
 ```
 
-
 # Create Job Description
 
 Endpoint: `/api/v1/job-descriptions`
@@ -131,7 +130,7 @@ Status Code: `500`
 
 # Get Job Description by ID
 
-Endpoint: `/api/v1/job-description/:id`
+Endpoint: `/api/v1/job-descriptions/:id`
 
 Method: `GET`
 
@@ -185,7 +184,7 @@ Status Code: `400`
 
 # Update Job Description
 
-Endpoint: `/api/v1/job-description/:id`
+Endpoint: `/api/v1/job-descriptions/:id`
 
 Method: `PATCH`
 
@@ -253,7 +252,7 @@ Status Code: `404`
 
 # Delete Job Description
 
-Endpoint: `/api/v1/job-description/:id`
+Endpoint: `/api/v1/job-descriptions/:id`
 
 Method: `DELETE`
 
