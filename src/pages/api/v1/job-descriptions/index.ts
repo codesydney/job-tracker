@@ -7,6 +7,11 @@ const getJobDescriptions = async (
 ) => {
   try {
     const data = await prisma.jobDescription.findMany();
+    if (!data) {
+      return res
+        .status(404)
+        .json({ message: `Could not find job descriptions try again` });
+    }
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({
@@ -19,11 +24,15 @@ const getJobDescriptions = async (
 const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { rawText } = req.body;
-    console.log(rawText);
     const data = await prisma.jobDescription.create({
       data: { rawText },
     });
 
+    if (!data) {
+      return res
+        .status(404)
+        .json({ message: `Could not create job description try again` });
+    }
     res.status(201).json(data);
   } catch (error) {
     res.status(500).json({

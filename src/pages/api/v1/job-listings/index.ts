@@ -4,6 +4,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const getJobListings = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const data = await prisma.jobListing.findMany();
+    if (!data) {
+      return res
+        .status(404)
+        .json({ message: `Could not find job listings try again` });
+    }
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({
@@ -26,10 +31,13 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         company,
       },
     });
-
+    if (!data) {
+      return res
+        .status(404)
+        .json({ message: `Could not create job listing try again` });
+    }
     res.status(201).json(data);
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       message: `Failed to create Job Listing: invalid 'url' field`,
     });
