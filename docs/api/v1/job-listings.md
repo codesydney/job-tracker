@@ -10,12 +10,12 @@ type JobListing = {
   company: string,
   createdAt: Date,
   updatedAt: Date,
-}
+} 
 ```
 
 # Get Job Listings
 
-Endpoint: `/api/v1/job-listings`
+Endpoint: `/api/v1/job-listing`
 
 Method: `GET`
 
@@ -71,6 +71,7 @@ Status Code: `500`
 }
 ```
 
+
 # Create Job Listing
 
 Endpoint: `/api/v1/job-listings`
@@ -81,7 +82,7 @@ Method: `POST`
 
 ```TS
 type CreateJobListingRequest = {
-  jobDescriptionId?: number,
+  jobDescription?: string,
   url: string,
   source: string,
   position:: string,
@@ -152,7 +153,7 @@ Status Code: `500`
 
 # Get Job Listing by ID
 
-Endpoint: `/api/v1/job-listings/:id`
+Endpoint: `/api/v1/job-listing/:id`
 
 Method: `GET`
 
@@ -210,7 +211,7 @@ Status Code: `400`
 
 # Update Job Listing
 
-Endpoint: `/api/v1/job-listings/:id`
+Endpoint: `/api/v1/job-listing/:id`
 
 Method: `PATCH`
 
@@ -288,7 +289,7 @@ Status Code: `404`
 
 # Delete Job Listing
 
-Endpoint: `/api/v1/job-listings/:id`
+Endpoint: `/api/v1/job-listing/:id`
 
 Method: `DELETE`
 
