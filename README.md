@@ -37,22 +37,34 @@ Run the following command to install the npm dependencies.
 npm install
 ```
 
-#### Setting up Environment Variables
+### Setting up Environment Variables
 
 Go to the `.env.example` file and copy it to `.env`. This file will be used by Prisma to connect to your database.
 
+### Running PostgreSQL via Docker (Recommended)
 
-#### Setting up Local PostgreSQL Database
+Install Docker by following the instructions at: https://docs.docker.com/get-docker/
 
-Once that is done, you will want to download and install a local PostgreSQL database. Download Link: https://www.postgresql.org/download/
+- Run the development database with `npm run docker-dev-start`
+- Stop the docker containers with `npm run docker-stop`
 
-_If you used a custom password, you will have to update the connection string in the `.env` file._
+By default the container's port will be bound to 5432.
 
-To initialize your database, run
+### Installing a PostgreSQL Database on Your Local Machine
+
+Alternatively, you can download and install a local PostgreSQL database.
+
+Download Link: https://www.postgresql.org/download/
+
+### Initializing the Database with Prisma
+
+Once you have a PostgreSQL database ready, you can initialize your database by running
 
 ```bash
 npx prisma migrate dev --name init
 ```
+
+_If you used a custom password, you will have to update the connection string in the `.env` file._
 
 ---
 
@@ -65,7 +77,6 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 
 ---
 
