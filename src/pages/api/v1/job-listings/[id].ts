@@ -29,10 +29,17 @@ const updateHandler = async (
   id: string
 ) => {
   try {
-    const { url, source, position, company } = req.body;
+    const { jobDescriptionId, url, source, position, company } = req.body;
+
     const data = await prisma.jobListing.update({
       where: { id: parseInt(id) },
-      data: { url, source, position, company },
+      data: {
+        jobDescriptionId: parseInt(jobDescriptionId),
+        url,
+        source,
+        position,
+        company,
+      },
     });
     if (!data) {
       return res
@@ -41,6 +48,7 @@ const updateHandler = async (
     }
     res.status(200).json(data);
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: `Something went wrong from our side and we were unable to update job listing.`,
     });
