@@ -3,7 +3,15 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const getApplications = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const data = await prisma.application.findMany();
+    const data = await prisma.application.findMany({
+      include: {
+        jobListing: {
+          include: {
+            jobDescription: true,
+          },
+        },
+      },
+    });
     if (!data) {
       return res
         .status(404)
@@ -20,9 +28,17 @@ const getApplications = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { jobListingId, status } = req.body;
+    const { status, url, source, position, company } = req.body;
     const data = await prisma.application.create({
-      data: { jobListingId, status },
+      data: {
+        status,
+        jobListing: {
+          create: { url, source, position, company },
+        },
+      },
+      include: {
+        jobListing: true,
+      },
     });
     if (!data) {
       return res
