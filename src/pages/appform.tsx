@@ -36,7 +36,8 @@ const AppForm: NextPage = () => {
 
   const onSubmit: SubmitHandler<IAppForm> = (data) =>
     axios
-      .post('api/v1/job-listings', {
+      .post('api/v1/applications', {
+        status: data.status,
         url: data.url,
         source: data.source,
         position: data.position,
@@ -44,21 +45,12 @@ const AppForm: NextPage = () => {
       })
       .then(function (response) {
         console.log(response);
-        localStorage.setItem('jobLisId', JSON.parse(response.data.id));
+        localStorage.setItem(
+          'jobLisId',
+          JSON.parse(response.data.jobListing.id)
+        );
 
-        axios
-          .post('api/v1/applications', {
-            jobListingId: response.data.id,
-            status: data.status,
-          })
-          .then(function (response) {
-            console.log(response);
-
-            router.push('/jdform');
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        router.push('/jdform');
       })
       .catch(function (error) {
         console.log(error);
