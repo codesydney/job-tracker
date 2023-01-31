@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 interface IJdForm {
   description: String;
@@ -9,6 +10,7 @@ interface IJdForm {
 
 const JdForm: NextPage = () => {
   const router = useRouter();
+  const [value, setValue] = useState<string>();
 
   const {
     register,
@@ -17,29 +19,19 @@ const JdForm: NextPage = () => {
   } = useForm<IJdForm>();
 
   const onSubmit: SubmitHandler<IJdForm> = (data) => {
-    const value = localStorage.getItem('jobLisId');
+    const tempValue = localStorage.getItem('jobLisId');
+    if (typeof tempValue === 'string') {
+      setValue(JSON.parse(tempValue));
+    }
 
     axios
       .post('api/v1/job-descriptions', {
         rawText: data.description,
+        jobListingId: value,
       })
       .then(function (response) {
+        router.push('/applications');
         console.log(response);
-        if (typeof value === 'string') {
-          const id = JSON.parse(value);
-          console.log(response.data.id);
-          axios
-            .patch(`api/v1/job-listings/${id}`, {
-              jobDescriptionId: response.data.id,
-            })
-            .then(function (response) {
-              console.log(response);
-              router.push('/applications');
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        }
       })
       .catch(function (error) {
         console.log(error);
