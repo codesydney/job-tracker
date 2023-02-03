@@ -1,6 +1,7 @@
-import prisma from '../../../../lib/prisma';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { AnyARecord } from 'dns';
+import prisma from "../../../../lib/prisma";
+import { NextApiRequest, NextApiResponse } from "next";
+// trigger linting GH Action
+import { AnyARecord } from "dns";
 
 const getApplication = async (
   req: NextApiRequest,
@@ -79,11 +80,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  if (req.method === 'GET') {
+  if (req.method === "GET") {
     getApplication(req, res, id);
-  } else if (req.method === 'PATCH') {
+  } else if (req.method === "PATCH") {
     updateHandler(req, res, id);
-  } else if (req.method === 'DELETE') {
+  } else if (req.method === "DELETE") {
     deleteHandler(req, res, id);
   }
 };
