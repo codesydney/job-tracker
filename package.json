@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:report": "eslint . --format json --output-file ./lint-results/web.json",
     "test": "jest",
     "test:watch": "jest --watch"
   },
