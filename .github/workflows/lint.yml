@@ -1,4 +1,4 @@
-name: 'Lint and Comment on PR'
+name: 'Lint'
 
 on: [pull_request]
     
