@@ -1,0 +1,28 @@
+name: 'Lint and Comment on PR'
+
+on: [pull_request]
+    
+jobs:
+  lint_and_comment_on_pr:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout PR Branch
+        uses: actions/checkout@v3.3.0
+        
+      - name: Use Node 18.x
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: '18'
+      
+      - name: Install NPM Deps
+        run: npm ci --cache .npm
+        
+      - name: Run Lint
+        run: npm run lint:report
+        continue-on-error: true
+      
+      - name: Annotate Code Linting Results
+        uses: ataylorme/eslint-annotate-action@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          report-json: "lint-results/web.json"
