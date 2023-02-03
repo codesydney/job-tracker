@@ -1,7 +1,5 @@
 import prisma from "../../../../lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
-// trigger linting GH Action
-import { AnyARecord } from "dns";
 
 const getApplication = async (
   req: NextApiRequest,
