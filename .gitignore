@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# lint results
+/lint-results
+
 # next.js
 /.next/
 /out/
