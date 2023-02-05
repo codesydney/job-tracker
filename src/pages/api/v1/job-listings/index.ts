@@ -20,11 +20,10 @@ const getJobListings = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { jobDescriptionId, url, source, position, company } = req.body;
+    const { url, source, position, company } = req.body;
 
     const data = await prisma.jobListing.create({
       data: {
-        jobDescriptionId: parseInt(jobDescriptionId),
         url,
         source,
         position,

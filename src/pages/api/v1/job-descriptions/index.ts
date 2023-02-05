@@ -23,9 +23,13 @@ const getJobDescriptions = async (
 
 const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { rawText } = req.body;
+    const { rawText, jobListingId } = req.body;
     const data = await prisma.jobDescription.create({
-      data: { rawText },
+      data: {
+        rawText,
+        jobListing: { connect: { id: parseInt(jobListingId) } },
+      },
+      include: { jobListing: true },
     });
 
     if (!data) {
