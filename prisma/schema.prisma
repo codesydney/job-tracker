@@ -30,7 +30,7 @@ enum Status {
 
 model JobListing {
   id                Int             @id @default(autoincrement())
-  jobDescriptionId  Int             @unique
+  jobDescriptionId  Int?             @unique
   url               String          @db.VarChar(512)
   source            Source
   position          String          
@@ -38,7 +38,7 @@ model JobListing {
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
 
-  jobDescription    JobDescription  @relation(fields: [jobDescriptionId], references: [id])
+  jobDescription    JobDescription?  @relation(fields: [jobDescriptionId], references: [id])
   application       Application?
 }
 
