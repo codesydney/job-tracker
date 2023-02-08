@@ -115,11 +115,13 @@ const AppForm: NextPage = () => {
             className='max-w-[36%] border px-3 py-1 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md mx-4'
             {...register('status')}
           >
-            <option value='APPLIED'>Applied</option>
-            <option value='REJECTED'>Rejected</option>
-            <option value='PHONE_SCREEN'>Phone Screen</option>
-            <option value='INTERVIEW'>Interview</option>
-            <option value='JOB_OFFER'>Job Offer</option>
+            {Object.keys(Status).map((key: string) => {
+              return (
+                <option key={key} value={key}>
+                  {Status[key as keyof typeof Status]}
+                </option>
+              );
+            })}
           </select>
           <button
             type='submit'
