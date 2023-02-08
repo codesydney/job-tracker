@@ -96,7 +96,7 @@ const Applications: NextPage = () => {
 
             return (
               <div
-                className='shadow-md rounded-lg flex flex-wrap py-2 my-2 hover:scale-105'
+                className='shadow-md rounded-lg flex flex-wrap py-2 my-2 hover:bg-purple-50'
                 key={index}
               >
                 <div className='flex basis-full'>
