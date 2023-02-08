@@ -64,7 +64,7 @@ const JdForm: NextPage = () => {
             className='my-4 ml-4 self-start bg-purple-500 text-white py-2 px-6 rounded-md hover:bg-purple-600'
           >
             Submit
-          </button>{' '}
+          </button>
         </form>
       </div>
     </div>
