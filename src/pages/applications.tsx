@@ -45,7 +45,7 @@ const Applications: NextPage = () => {
   const router = useRouter();
 
   const handleAddNew = () => {
-    router.push('/appform');
+    router.push('/createapp');
   };
 
   const [isOpen, setIsOpen] = useState<boolean[]>([]);

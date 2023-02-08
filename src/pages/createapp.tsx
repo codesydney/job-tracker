@@ -50,7 +50,7 @@ const AppForm: NextPage = () => {
           JSON.parse(response.data.jobListing.id)
         );
 
-        router.push('/jdform');
+        router.push('/createjd');
       })
       .catch(function (error) {
         console.log(error);
