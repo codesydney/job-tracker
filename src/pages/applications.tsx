@@ -4,17 +4,19 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
-enum StatusEnum {
-  APPLIED = 'Applied',
-  REJECTED = 'Rejected',
-  PHONE_SCREEN = 'Phone Screen',
-  INTERVIEW = 'Interview',
-  JOB_OFFER = 'Job Offer',
-}
-enum SourceEnum {
-  LinkedIn = 'LinkedIn',
-  Seek = 'Seek',
-}
+const Status = {
+  APPLIED: 'Applied',
+  REJECTED: 'Rejected',
+  PHONE_SCREEN: 'Phone Screen',
+  INTERVIEW: 'Interview',
+  JOB_OFFER: 'Job Offer',
+} as const;
+
+const Source = {
+  LinkedIn: 'LinkedIn',
+  Seek: 'Seek',
+} as const;
+
 interface IJobDescription {
   rawText: String;
 }
@@ -23,15 +25,15 @@ interface IJobListing {
   company: String;
   position: String;
   url: String;
-  source: SourceEnum;
-  status: StatusEnum;
+  source: typeof Source;
+  status: typeof Status;
   jobDescription: IJobDescription;
 }
 
 interface IApplication {
   id: Number;
   jobListingId: Number;
-  status: StatusEnum;
+  status: typeof Status;
   createdAt: Date;
   updatedAt: Date;
   jobListing: IJobListing;

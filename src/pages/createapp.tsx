@@ -3,25 +3,25 @@ import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-enum SourceEnum {
-  LinkedIn = 'LinkedIn',
-  Seek = 'Seek',
-}
+const Source = {
+  LinkedIn: 'LinkedIn',
+  Seek: 'Seek',
+} as const;
 
-enum StatusEnum {
-  APPLIED = 'Applied',
-  REJECTED = 'Rejected',
-  PHONE_SCREEN = 'Phone Screen',
-  INTERVIEW = 'Interview',
-  JOB_OFFER = 'Job Offer',
-}
+const Status = {
+  APPLIED: 'Applied',
+  REJECTED: 'Rejected',
+  PHONE_SCREEN: 'Phone Screen',
+  INTERVIEW: 'Interview',
+  JOB_OFFER: 'Job Offer',
+} as const;
 
 interface IAppForm {
   company: String;
   position: String;
   url: String;
-  source: SourceEnum;
-  status: StatusEnum;
+  source: typeof Source;
+  status: typeof Status;
 }
 
 const AppForm: NextPage = () => {
