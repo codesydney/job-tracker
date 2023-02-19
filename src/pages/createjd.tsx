@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface IJdForm {
   description: String;
@@ -18,25 +18,30 @@ const JdForm: NextPage = () => {
     formState: { errors },
   } = useForm<IJdForm>();
 
-  const onSubmit: SubmitHandler<IJdForm> = (data) => {
+  useEffect(() => {
     const tempValue = localStorage.getItem('jobLisId');
     if (typeof tempValue === 'string') {
       setValue(JSON.parse(tempValue));
     }
+  }, []);
 
+  const onSubmit: SubmitHandler<IJdForm> = (data) => {
+    console.log(value);
     axios
       .post('api/v1/job-descriptions', {
         rawText: data.description,
         jobListingId: value,
       })
       .then(function (response) {
-        router.push('/applications');
         console.log(response);
+        router.push('/applications');
       })
       .catch(function (error) {
         console.log(error);
       });
   };
+
+  const handlePost = () => {};
 
   return (
     <div className='grid grid-cols-12 text-xl'>
