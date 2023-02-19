@@ -4,17 +4,23 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
-enum StatusEnum {
-  APPLIED = 'Applied',
-  REJECTED = 'Rejected',
-  PHONE_SCREEN = 'Phone Screen',
-  INTERVIEW = 'Interview',
-  JOB_OFFER = 'Job Offer',
-}
-enum SourceEnum {
-  LinkedIn = 'LinkedIn',
-  Seek = 'Seek',
-}
+const SOURCE = {
+  LinkedIn: 'LinkedIn',
+  Seek: 'Seek',
+} as const;
+
+type Source = keyof typeof SOURCE;
+
+const STATUS = {
+  APPLIED: 'Applied',
+  REJECTED: 'Rejected',
+  PHONE_SCREEN: 'Phone Screen',
+  INTERVIEW: 'Interview',
+  JOB_OFFER: 'Job Offer',
+} as const;
+
+type Status = keyof typeof STATUS;
+
 interface IJobDescription {
   rawText: String;
 }
@@ -23,15 +29,15 @@ interface IJobListing {
   company: String;
   position: String;
   url: String;
-  source: SourceEnum;
-  status: StatusEnum;
+  source: Source;
+  status: Status;
   jobDescription: IJobDescription;
 }
 
 interface IApplication {
   id: Number;
   jobListingId: Number;
-  status: StatusEnum;
+  status: Status;
   createdAt: Date;
   updatedAt: Date;
   jobListing: IJobListing;
@@ -45,7 +51,7 @@ const Applications: NextPage = () => {
   const router = useRouter();
 
   const handleAddNew = () => {
-    router.push('/appform');
+    router.push('/createapp');
   };
 
   const [isOpen, setIsOpen] = useState<boolean[]>([]);
@@ -96,7 +102,7 @@ const Applications: NextPage = () => {
 
             return (
               <div
-                className='shadow-md rounded-lg flex flex-wrap py-2 my-2 hover:scale-105'
+                className='shadow-md rounded-lg flex flex-wrap py-2 my-2 hover:bg-purple-50'
                 key={index}
               >
                 <div className='flex basis-full'>

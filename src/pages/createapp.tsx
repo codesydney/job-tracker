@@ -3,25 +3,29 @@ import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-enum SourceEnum {
-  LinkedIn = 'LinkedIn',
-  Seek = 'Seek',
-}
+const SOURCE = {
+  LinkedIn: 'LinkedIn',
+  Seek: 'Seek',
+} as const;
 
-enum StatusEnum {
-  APPLIED = 'Applied',
-  REJECTED = 'Rejected',
-  PHONE_SCREEN = 'Phone Screen',
-  INTERVIEW = 'Interview',
-  JOB_OFFER = 'Job Offer',
-}
+type Source = keyof typeof SOURCE;
+
+const STATUS = {
+  APPLIED: 'Applied',
+  REJECTED: 'Rejected',
+  PHONE_SCREEN: 'Phone Screen',
+  INTERVIEW: 'Interview',
+  JOB_OFFER: 'Job Offer',
+} as const;
+
+type Status = keyof typeof STATUS;
 
 interface IAppForm {
   company: String;
   position: String;
   url: String;
-  source: SourceEnum;
-  status: StatusEnum;
+  source: Source;
+  status: Status;
 }
 
 const AppForm: NextPage = () => {
@@ -50,7 +54,7 @@ const AppForm: NextPage = () => {
           JSON.parse(response.data.jobListing.id)
         );
 
-        router.push('/jdform');
+        router.push('/createjd');
       })
       .catch(function (error) {
         console.log(error);
@@ -115,11 +119,13 @@ const AppForm: NextPage = () => {
             className='max-w-[36%] border px-3 py-1 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md mx-4'
             {...register('status')}
           >
-            <option value='APPLIED'>Applied</option>
-            <option value='REJECTED'>Rejected</option>
-            <option value='PHONE_SCREEN'>Phone Screen</option>
-            <option value='INTERVIEW'>Interview</option>
-            <option value='JOB_OFFER'>Job Offer</option>
+            {Object.keys(STATUS).map((key: string) => {
+              return (
+                <option key={key} value={key}>
+                  {key}
+                </option>
+              );
+            })}
           </select>
           <button
             type='submit'
