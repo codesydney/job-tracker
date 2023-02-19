@@ -4,7 +4,14 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
-const Status = {
+const SOURCE = {
+  LinkedIn: 'LinkedIn',
+  Seek: 'Seek',
+} as const;
+
+type Source = keyof typeof SOURCE;
+
+const STATUS = {
   APPLIED: 'Applied',
   REJECTED: 'Rejected',
   PHONE_SCREEN: 'Phone Screen',
@@ -12,10 +19,7 @@ const Status = {
   JOB_OFFER: 'Job Offer',
 } as const;
 
-const Source = {
-  LinkedIn: 'LinkedIn',
-  Seek: 'Seek',
-} as const;
+type Status = keyof typeof STATUS;
 
 interface IJobDescription {
   rawText: String;
@@ -25,15 +29,15 @@ interface IJobListing {
   company: String;
   position: String;
   url: String;
-  source: typeof Source;
-  status: typeof Status;
+  source: Source;
+  status: Status;
   jobDescription: IJobDescription;
 }
 
 interface IApplication {
   id: Number;
   jobListingId: Number;
-  status: typeof Status;
+  status: Status;
   createdAt: Date;
   updatedAt: Date;
   jobListing: IJobListing;

@@ -3,12 +3,14 @@ import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-const Source = {
+const SOURCE = {
   LinkedIn: 'LinkedIn',
   Seek: 'Seek',
 } as const;
 
-const Status = {
+type Source = keyof typeof SOURCE;
+
+const STATUS = {
   APPLIED: 'Applied',
   REJECTED: 'Rejected',
   PHONE_SCREEN: 'Phone Screen',
@@ -16,12 +18,14 @@ const Status = {
   JOB_OFFER: 'Job Offer',
 } as const;
 
+type Status = keyof typeof STATUS;
+
 interface IAppForm {
   company: String;
   position: String;
   url: String;
-  source: typeof Source;
-  status: typeof Status;
+  source: Source;
+  status: Status;
 }
 
 const AppForm: NextPage = () => {
@@ -115,10 +119,10 @@ const AppForm: NextPage = () => {
             className='max-w-[36%] border px-3 py-1 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md mx-4'
             {...register('status')}
           >
-            {Object.keys(Status).map((key: string) => {
+            {Object.keys(STATUS).map((key: string) => {
               return (
                 <option key={key} value={key}>
-                  {Status[key as keyof typeof Status]}
+                  {key}
                 </option>
               );
             })}
